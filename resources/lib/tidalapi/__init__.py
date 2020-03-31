@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import unicode_literals
+
 
 import re
 import datetime
@@ -24,10 +24,10 @@ import json
 import logging
 import requests
 from collections import Iterable
-from models import UserInfo, Subscription, SubscriptionType, Quality, AlbumType, TrackUrl, VideoUrl, CutInfo
-from models import Artist, Album, Track, Video, Mix, Playlist, BrowsableMedia, PlayableMedia, Promotion, SearchResult, Category
+from .models import UserInfo, Subscription, SubscriptionType, Quality, AlbumType, TrackUrl, VideoUrl, CutInfo
+from .models import Artist, Album, Track, Video, Mix, Playlist, BrowsableMedia, PlayableMedia, Promotion, SearchResult, Category
 try:
-    from urlparse import urljoin
+    from urllib.parse import urljoin
 except ImportError:
     from urllib.parse import urljoin
 
@@ -312,7 +312,7 @@ class Session(object):
         return [self._parse_promotion(item) for item in items if item['type'] in types]
 
     def get_category_items(self, group):
-        items = map(self._parse_category, self.request('GET', group).json())
+        items = list(map(self._parse_category, self.request('GET', group).json()))
         for item in items:
             item._group = group
         return items
@@ -676,7 +676,7 @@ class Favorites(object):
         return items
 
     def add(self, content_type, item_ids):
-        if isinstance(item_ids, basestring):
+        if isinstance(item_ids, str):
             ids = [item_ids]
         else:
             ids = item_ids
