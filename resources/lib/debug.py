@@ -21,12 +21,6 @@ import sys, os
 import logging
 import xbmc
 
-try:
-    from unidecode import unidecode
-except:
-    def unidecode(txt): 
-        return txt.decode('utf-8', 'ignore') 
-
 #------------------------------------------------------------------------------
 # Debug class
 #------------------------------------------------------------------------------
@@ -59,8 +53,6 @@ class DebugHelper(object):
                     # Complex Logging
                     level = xbmc.LOGNOTICE
                 if level != xbmc.LOGSEVERE:
-                    if isinstance(txt, str):
-                        txt = unidecode(txt)
                     xbmc.log(b"[%s] %s" % (self.pluginName, txt), level) 
         except:
             xbmc.log(b"[%s] Unicode Error in message text" % self.pluginName, xbmc.LOGERROR)
@@ -69,8 +61,6 @@ class DebugHelper(object):
         ''' Logs an Exception as Error Message '''
         try:
             if txt:
-                if isinstance(txt, str):
-                    txt = unidecode(txt)
                 xbmc.log(b"[%s] %s\n%s" % (self.pluginName, txt, str(e)), level=xbmc.LOGERROR) 
             logging.exception(str(e))
         except:
