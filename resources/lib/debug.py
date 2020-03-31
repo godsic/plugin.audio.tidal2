@@ -21,6 +21,12 @@ import sys, os
 import logging
 import xbmc
 
+try:
+    from unidecode import unidecode
+except:
+    def unidecode(txt): 
+        return txt.decode('utf-8', 'ignore') 
+
 #------------------------------------------------------------------------------
 # Debug class
 #------------------------------------------------------------------------------
@@ -53,15 +59,15 @@ class DebugHelper(object):
                     # Complex Logging
                     level = xbmc.LOGNOTICE
                 if level != xbmc.LOGSEVERE:
-                    xbmc.log(b"[%s] %s" % (self.pluginName, txt), level) 
+                    xbmc.log("[{}] {}".format(self.pluginName, txt), level) 
         except:
-            xbmc.log(b"[%s] Unicode Error in message text" % self.pluginName, xbmc.LOGERROR)
+            xbmc.log("[{}] Unicode Error in message text".format(self.pluginName), xbmc.LOGERROR)
 
     def logException(self, e, txt=''):
         ''' Logs an Exception as Error Message '''
         try:
             if txt:
-                xbmc.log(b"[%s] %s\n%s" % (self.pluginName, txt, str(e)), level=xbmc.LOGERROR) 
+                xbmc.log("[{}] {}\n{}".format(self.pluginName, txt, str(e)), level=xbmc.LOGERROR) 
             logging.exception(str(e))
         except:
             pass
@@ -115,8 +121,8 @@ class KodiLogHandler(logging.StreamHandler):
         logging.StreamHandler.__init__(self)
         self._modules = modules
         self.pluginName = name
-        prefix = b"[%s] " % name
-        formatter = logging.Formatter(prefix + b'%(name)s: %(message)s')
+        prefix = "[{}]".format(name)
+        formatter = logging.Formatter(prefix + '%(name)s: %(message)s')
         self.setFormatter(formatter)
 
     def emit(self, record):
@@ -134,10 +140,7 @@ class KodiLogHandler(logging.StreamHandler):
         try:
             xbmc.log(self.format(record), levels[record.levelno])
         except:
-            try:
-                xbmc.log(self.format(record).encode('utf-8', 'ignore'), levels[record.levelno])
-            except:
-                xbmc.log(b"[%s] Unicode Error in message text" % self.pluginName, levels[record.levelno])
+            xbmc.log("[{}] Unicode Error in message text".format(self.pluginName), levels[record.levelno])
 
     def flush(self):
         pass
