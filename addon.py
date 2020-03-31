@@ -354,7 +354,7 @@ def user_playlist_clear(playlist_id):
         session.show_busydialog(_T(30258), playlist.name)
         try:
             session.user.remove_all_playlist_entries(playlist_id)
-        except Exception, e:
+        except Exception as e:
             log(str(e), level=xbmc.LOGERROR)
             traceback.print_exc()
         session.hide_busydialog()
@@ -370,7 +370,7 @@ def user_playlist_delete(playlist_id):
         session.show_busydialog(_T(30235), playlist.name)
         try:
             session.user.delete_playlist(playlist_id)
-        except Exception, e:
+        except Exception as e:
             log(str(e), level=xbmc.LOGERROR)
             traceback.print_exc()
         session.hide_busydialog()
@@ -403,7 +403,7 @@ def user_playlist_add_item(item_type, item_id):
         session.show_busydialog(_T(30263), playlist.name)
         try:
             session.user.add_playlist_entries(playlist=playlist, item_ids=items)
-        except Exception, e:
+        except Exception as e:
             log(str(e), level=xbmc.LOGERROR)
             traceback.print_exc()
         session.hide_busydialog()
@@ -419,7 +419,7 @@ def user_playlist_remove_item(playlist_id, entry_no):
         session.show_busydialog(_T(30264), playlist.name)
         try:
             session.user.remove_playlist_entry(playlist, entry_no=entry_no)
-        except Exception, e:
+        except Exception as e:
             log(str(e), level=xbmc.LOGERROR)
             traceback.print_exc()
         session.hide_busydialog()
@@ -434,7 +434,7 @@ def user_playlist_remove_id(playlist_id, item_id):
         session.show_busydialog(_T(30264), playlist.name)
         try:
             session.user.remove_playlist_entry(playlist, item_id=item_id)
-        except Exception, e:
+        except Exception as e:
             log(str(e), level=xbmc.LOGERROR)
             traceback.print_exc()
         session.hide_busydialog()
@@ -455,7 +455,7 @@ def user_playlist_remove_album(playlist_id, item_id, dialog=True):
                 if '%s' % item.album.id == '%s' % item_id:
                     session.user.remove_playlist_entry(playlist, entry_no=item._playlist_pos)
                     break # Remove only one Item
-        except Exception, e:
+        except Exception as e:
             log(str(e), level=xbmc.LOGERROR)
             traceback.print_exc()
         session.hide_busydialog()
@@ -474,7 +474,7 @@ def user_playlist_move_entry(playlist_id, entry_no, item_id):
                 ok = session.user.remove_playlist_entry(playlist_id, entry_no=entry_no)
             else:
                 dialog.notification(plugin.name, _T('API Call Failed'), xbmcgui.NOTIFICATION_ERROR)
-        except Exception, e:
+        except Exception as e:
             log(str(e), level=xbmc.LOGERROR)
             traceback.print_exc()
         session.hide_busydialog()
@@ -561,7 +561,7 @@ def user_playlist_toggle():
         else:
             session.show_busydialog(_T(30263), userpl_name)
             session.user.add_playlist_entries(playlist=userpl_id, item_ids=['%s' % item.id])
-    except Exception, e:
+    except Exception as e:
         log(str(e), level=xbmc.LOGERROR)
         traceback.print_exc()
     session.hide_busydialog()

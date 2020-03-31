@@ -1686,7 +1686,7 @@ class TidalUser(User):
             item_list = [item.title for item in items]
             if allowNew:
                 item_list.append(_T(30237))
-        except Exception, e:
+        except Exception as e:
             log(str(e), level=xbmc.LOGERROR)
             return None
         selected = dialog.select(headline, item_list)
