@@ -23,7 +23,7 @@ import random
 import json
 import logging
 import requests
-from collections import Iterable
+from collections.abc import Iterable
 from .models import UserInfo, Subscription, SubscriptionType, Quality, AlbumType, TrackUrl, VideoUrl, CutInfo
 from .models import Artist, Album, Track, Video, Mix, Playlist, BrowsableMedia, PlayableMedia, Promotion, SearchResult, Category
 try:
