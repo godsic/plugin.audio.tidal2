@@ -110,7 +110,7 @@ def homepage_items():
 def homepage_item(item_type, path):
     path = urllib.unquote_plus(path).decode('utf-8').strip()
     rettype = HOMEPAGE_ITEM_TYPES.get(item_type, 'NONE')
-    if rettype <> 'NONE':
+    if rettype != 'NONE':
         params = { 'locale': session._config.locale, 'deviceType': 'BROWSER', 'offset': 0, 'limit': 50 }
         items = session._map_request(url=path, method='GET', params=params, ret=rettype)
         session.add_list_items(items, content=CONTENT_FOR_TYPE.get(rettype, 'files'), end=True)
@@ -466,7 +466,7 @@ def user_playlist_remove_album(playlist_id, item_id, dialog=True):
 def user_playlist_move_entry(playlist_id, entry_no, item_id):
     dialog = xbmcgui.Dialog()
     playlist = session.user.selectPlaylistDialog(headline=_T(30248), allowNew=True)
-    if playlist and playlist.id <> playlist_id:
+    if playlist and playlist.id != playlist_id:
         session.show_busydialog(_T(30265), playlist.name)
         try:
             ok = session.user.add_playlist_entries(playlist=playlist, item_ids=[item_id])
@@ -692,7 +692,7 @@ def search():
 def search_type(field):
     last_field = addon.getSetting('last_search_field').decode('utf-8')
     search_text = addon.getSetting('last_search_text').decode('utf-8')
-    if last_field <> field or not search_text:
+    if last_field != field or not search_text:
         addon.setSetting('last_search_field', field)
         keyboard = xbmc.Keyboard('', _T(30206))
         keyboard.doModal()

@@ -163,10 +163,10 @@ class MyMonitor(xbmc.Monitor):
                 return False
             api_features = LoginToken.getFeatures(self.config.session_token_name)
             stream_features = LoginToken.getFeatures(self.config.stream_token_name)
-            if self.config.forceHttpVideo and api_features.get('videoMode') <> 'HTTP':
+            if self.config.forceHttpVideo and api_features.get('videoMode') != 'HTTP':
                 log('Changed HTTP Streaming mode. Relogin needed.')
                 return True
-            codec = 'AAC' if self.config.quality <> Quality.lossless else self.config.codec
+            codec = 'AAC' if self.config.quality != Quality.lossless else self.config.codec
             if codec not in stream_features.get('codecs'):
                 log('Changes to Codec needs Relogin.')
                 return True
