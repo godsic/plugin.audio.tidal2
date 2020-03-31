@@ -26,10 +26,7 @@ import requests
 from collections.abc import Iterable
 from .models import UserInfo, Subscription, SubscriptionType, Quality, AlbumType, TrackUrl, VideoUrl, CutInfo
 from .models import Artist, Album, Track, Video, Mix, Playlist, BrowsableMedia, PlayableMedia, Promotion, SearchResult, Category
-try:
-    from urllib.parse import urljoin
-except ImportError:
-    from urllib.parse import urljoin
+from urllib.parse import urljoin
 
 log = logging.getLogger(__name__.split('.')[-1])
 
