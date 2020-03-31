@@ -15,11 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import unicode_literals
+
 
 import sys
 import traceback
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import xbmc
 import xbmcgui
 import xbmcplugin
@@ -108,7 +108,7 @@ def homepage_items():
 
 @plugin.route('/homepage_item/<item_type>/<path>')
 def homepage_item(item_type, path):
-    path = urllib.unquote_plus(path).decode('utf-8').strip()
+    path = urllib.parse.unquote_plus(path).decode('utf-8').strip()
     rettype = HOMEPAGE_ITEM_TYPES.get(item_type, 'NONE')
     if rettype != 'NONE':
         params = { 'locale': session._config.locale, 'deviceType': 'BROWSER', 'offset': 0, 'limit': 50 }
@@ -324,7 +324,7 @@ def playlist_albums(playlist_id, offset):
 def user_playlists():
     items = session.user.playlists()
     # Find Default Playlists via title if ID is not available anymore
-    all_ids = session.user.playlists_cache.keys()
+    all_ids = list(session.user.playlists_cache.keys())
     for what in ['track', 'album', 'video']:
         playlist_id = addon.getSetting('default_%splaylist_id' % what).decode('utf-8')
         playlist_title = addon.getSetting('default_%splaylist_title' % what).decode('utf-8')
