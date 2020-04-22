@@ -198,11 +198,11 @@ class Session(object):
         if not playlist or playlist.numberOfItems == 0:
             return []
         itemCount = playlist.numberOfItems - offset
-        remaining = min(itemCount,limit)
+        remaining = min(itemCount, limit)
         result = []
         # Number of Items is limited to 100, so read multiple times if more than 100 entries are requested
         while remaining > 0:
-            nextLimit = min(100,remaining)
+            nextLimit = min(100, remaining)
             items = self._map_request('playlists/%s/items' % playlist.id, params={'offset': offset, 'limit': nextLimit}, ret='playlistitems')
             if items:
                 track_no = offset

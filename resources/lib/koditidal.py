@@ -1274,7 +1274,7 @@ class TidalSession(Session):
             media = self.get_track_url(track_id, quality=Quality.high, cut_id=cut_id, fallback=False)
         if media:
             if quality == Quality.lossless and media.codec not in ['FLAC', 'ALAC', 'MQA']:
-                xbmcgui.Dialog().notification(plugin.name, _T(30504) , icon=xbmcgui.NOTIFICATION_WARNING)
+                xbmcgui.Dialog().notification(plugin.name, _T(30504), icon=xbmcgui.NOTIFICATION_WARNING)
             log('Got stream with soundQuality:%s, codec:%s' % (media.soundQuality, media.codec))
         self.session_id = oldSessionId
         return media

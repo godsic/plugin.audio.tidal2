@@ -361,7 +361,7 @@ class Segment(BasePathMixin):
         self.cue_out = cue_out
         self.scte35 = scte35
         self.scte35_duration = scte35_duration
-        self.key = Key(base_uri=base_uri,**key) if key else None
+        self.key = Key(base_uri=base_uri, **key) if key else None
 
 
     def dumps(self, last_segment):
@@ -673,7 +673,7 @@ class PlaylistList(list, GroupedBasePathMixin):
 
 
 def denormalize_attribute(attribute):
-    return attribute.replace('_','-').upper()
+    return attribute.replace('_', '-').upper()
 
 def quoted(string):
     return '"%s"' % string
