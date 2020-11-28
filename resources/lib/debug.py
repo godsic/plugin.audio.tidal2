@@ -37,10 +37,10 @@ class DebugHelper(object):
 
     def __init__(self, pluginName, detailLevel=0, enableTidalApiLog=False):
         ''' Initialize Error Logging with a given Log Level
-            detailLevel = 0 : xbmc.LOGERROR and xbmc.LOGNOTICE
+            detailLevel = 0 : xbmc.LOGERROR and xbmc.LOGINFO
             detailLevel = 1 : as level 0 plus xbmc.LOGWARNING
             detailLevel = 2 : as level 1 plus xbmc.LOGDEBUG
-            detailLevel = 3 : as level 2 plus xbmc.LOGSEVERE
+            detailLevel = 3 : as level 2 plus xbmc.LOGFATAL
         '''
         self.pluginName = pluginName
         self.detailLevel = detailLevel
@@ -54,11 +54,11 @@ class DebugHelper(object):
             if self.detailLevel > 0 or level == xbmc.LOGERROR:
                 if self.detailLevel == 2 and level == xbmc.LOGDEBUG:
                     # More Logging
-                    level = xbmc.LOGNOTICE
-                elif self.detailLevel == 3 and (level == xbmc.LOGDEBUG or level == xbmc.LOGSEVERE):
+                    level = xbmc.LOGINFO
+                elif self.detailLevel == 3 and (level == xbmc.LOGDEBUG or level == xbmc.LOGFATAL):
                     # Complex Logging
-                    level = xbmc.LOGNOTICE
-                if level != xbmc.LOGSEVERE:
+                    level = xbmc.LOGINFO
+                if level != xbmc.LOGFATAL:
                     xbmc.log("[{}] {}".format(self.pluginName, txt), level) 
         except:
             xbmc.log("[{}] Unicode Error in message text".format(self.pluginName), xbmc.LOGERROR)
@@ -133,8 +133,8 @@ class KodiLogHandler(logging.StreamHandler):
             logging.CRITICAL: xbmc.LOGFATAL,
             logging.ERROR: xbmc.LOGERROR,
             logging.WARNING: xbmc.LOGWARNING,
-            logging.INFO: xbmc.LOGNOTICE,
-            logging.DEBUG: xbmc.LOGSEVERE,
+            logging.INFO: xbmc.LOGINFO,
+            logging.DEBUG: xbmc.LOGDEBUG,
             logging.NOTSET: xbmc.LOGNONE,
         }
         try:
