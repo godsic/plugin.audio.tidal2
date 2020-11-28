@@ -63,7 +63,7 @@ try:
 except:
     KODI_VERSION = (16, 1)
 
-CACHE_DIR = xbmc.translatePath(addon.getAddonInfo('profile'))
+CACHE_DIR = xbmcvfs.translatePath(addon.getAddonInfo('profile'))
 FAVORITES_FILE = os.path.join(CACHE_DIR, 'favorites.cfg')
 LOCKED_ARTISTS_FILE = os.path.join(CACHE_DIR, 'locked_artists.cfg')
 PLAYLISTS_FILE = os.path.join(CACHE_DIR, 'playlists.cfg')
