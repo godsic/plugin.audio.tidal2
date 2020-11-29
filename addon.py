@@ -75,7 +75,7 @@ def homepage_items():
                     item_type = module['type']
                     if item_type in HOMEPAGE_ITEM_TYPES:
                         apiPath = module['pagedList']['dataApiPath']
-                        item = FolderItem(module['title'], plugin.url_for(homepage_item, item_type, urllib.quote_plus(apiPath)))
+                        item = FolderItem(module['title'], plugin.url_for(homepage_item, item_type, urllib.parse.quote_plus(apiPath)))
                         items.append(item)
                         apiPaths.append(apiPath)
                     else:
@@ -91,7 +91,7 @@ def homepage_items():
                     item_type = module['type']
                     if item_type in HOMEPAGE_ITEM_TYPES:
                         apiPath = module['pagedList']['dataApiPath']
-                        item = FolderItem(module['title'], plugin.url_for(homepage_item, item_type, urllib.quote_plus(apiPath)))
+                        item = FolderItem(module['title'], plugin.url_for(homepage_item, item_type, urllib.parse.quote_plus(apiPath)))
                         if not apiPath in apiPaths:
                             if item_type == 'MIX_LIST':
                                 item.name = item.name + ' (' + _P('videos') + ')'

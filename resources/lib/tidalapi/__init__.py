@@ -456,13 +456,13 @@ class Session(object):
 
     def search(self, field, value, limit=50):
         search_field = field
-        if isinstance(search_field, basestring) and search_field.upper() == 'ALL':
+        if isinstance(search_field, str) and search_field.upper() == 'ALL':
             search_field = ALL_SAERCH_FIELDS
         params = {
             'query': value,
             'limit': limit,
         }
-        if isinstance(search_field, basestring):
+        if isinstance(search_field, str):
             what = search_field.upper()
             params.update({'types': what if what == 'ALL' or what.endswith('S') else what + 'S'})
         elif isinstance(search_field, Iterable):
