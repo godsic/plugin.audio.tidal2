@@ -536,3 +536,10 @@ msgctxt "#30510"
 msgid "Got no HTTP Stream, using HLS ..."
 msgstr "Kein HTTP-Stream, verwende HLS ..."
 
+msgctxt "#30511"
+msgid "Activate Fanart HTTP Server"
+msgstr "Fanart-HTTP-Server aktivieren"
+
+msgctxt "#30512"
+msgid "IP-Port for Fanart HTTP Server"
+msgstr "IP-Port für Fanart-HTTP-Server"
