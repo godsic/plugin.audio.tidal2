@@ -18,10 +18,10 @@
 
 
 import requests
-from urlparse import urlparse, parse_qs
+from urllib.parse import urlparse, parse_qs
 from threading import Thread
 try:
-    from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+    from http.server import BaseHTTPRequestHandler, HTTPServer
 except:
     # for Python 3
     from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -115,7 +115,7 @@ class MyMonitor(xbmc.Monitor):
 
     def _stop_servers(self):
         try:
-            if self.http_server <> None and self.http_thread <> None:
+            if self.http_server != None and self.http_thread != None:
                 #self.http_server.server_close()
                 self.http_server.shutdown()
                 self.http_thread.join()
@@ -141,7 +141,7 @@ class MyMonitor(xbmc.Monitor):
             fanart_server_port = self.config.fanart_server_port
             self.config.load()
             if self.config.fanart_server_enabled:
-                if self.config.fanart_server_port <> fanart_server_port or not fanart_server_enabled:
+                if self.config.fanart_server_port != fanart_server_port or not fanart_server_enabled:
                     self._stop_servers()
                     self._start_servers()
             else:
